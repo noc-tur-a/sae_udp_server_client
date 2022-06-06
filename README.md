@@ -8,4 +8,10 @@ Timestamps are just mockups.
 1. Server must log timestamp when measurement is requested
 2. Server must log timestamp when sound was detected
 3. Server must calculate time difference
-4. 
+4. Send difference to client
+
+## Used IP addresses:
+- PI 1: 192.168.8.210
+- PI 2: 192.168.8.220
+- PI 3: 192.168.8.230
+- Pot: 18000

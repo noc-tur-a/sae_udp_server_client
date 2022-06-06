@@ -44,21 +44,7 @@ pthread.h
 clientFunctions.h
 /mnt/c/pcloud/projects/clion/sae_udp_server_client/client/clientFunctions.h
 
-/mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.c
-stdio.h
--
-errorCode.h
 /mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.h
-
-/mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.h
-
-/mnt/c/pcloud/projects/clion/sae_udp_server_client/sharedFunctions.c
-stdio.h
--
-sys/time.h
--
-sharedFunctions.h
-/mnt/c/pcloud/projects/clion/sae_udp_server_client/sharedFunctions.h
 
 /mnt/c/pcloud/projects/clion/sae_udp_server_client/sharedFunctions.h
 

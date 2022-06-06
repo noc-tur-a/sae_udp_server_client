@@ -16,7 +16,6 @@
  * @return NULL
  */
 void* connectToPi(void* arg) {
-    printf("inside connectToPi\n");
     long n;
     thread_data_t *tdata = (thread_data_t *)arg;
     tdata->result = 0;
@@ -70,7 +69,7 @@ void* connectToPi(void* arg) {
     int pollResult = poll(pollfds, useClient + 1, TIMEOUT);
     if (pollResult > 0) {
         //poll successful
-        n = recvfrom(sock, receiveBuffer, 256, 0, (struct sockaddr *) &server, &serverLength);
+        n = recvfrom(sock, receiveBuffer, MAX_BUFFER_SIZE, 0, (struct sockaddr *) &server, &serverLength);
         if (n < 0) {
             printError(RECEIVE_ERROR);
             exit(EXIT_FAILURE);
