@@ -6,12 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.c
-stdio.h
--
-errorCode.h
-/mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.h
-
 /mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.h
 
 /mnt/c/pcloud/projects/clion/sae_udp_server_client/server/main.c
@@ -30,6 +24,8 @@ unistd.h
 time.h
 -
 sys/time.h
+-
+stdbool.h
 -
 ../errorCode.h
 /mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.h

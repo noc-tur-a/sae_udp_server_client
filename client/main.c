@@ -32,17 +32,16 @@ int main(int argc, char *argv[]) {
     pthread_join(thread_id_2, NULL);
     //pthread_join(thread_id_3, NULL);
 
-
-
     printf("After Thread*************************************************\n");
 
     printf("After Thread tdata.result_1: %llu\n", tdata_pi_1.result);
     printf("After Thread tdata.result_2: %llu\n", tdata_pi_2.result);
 
-    //TODO add 3 PI
+    //TODO add 3 PI and calculate distance
     if(tdata_pi_1.result != 0 && tdata_pi_2.result != 0) {
         printf("PI1 difference: %llu\n", tdata_pi_1.result - timeStamp);
         printf("PI2 difference: %llu\n", tdata_pi_2.result - timeStamp);
+        //printf("PI3 difference: %llu\n", tdata_pi_3.result - timeStamp);
     } else {
         printError(INSUFFICIENT_DATA);
     }

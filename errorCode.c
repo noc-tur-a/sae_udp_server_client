@@ -5,6 +5,10 @@
 #include <stdio.h>
 #include "errorCode.h"
 
+/**
+ * brief prints error codes
+ * @param errorCode the actual error that occurred
+ */
 void printError(errorCode_t errorCode) {
     if(errorCode == BIND_ERROR) {
         printf("Can't Bind to address.\n");

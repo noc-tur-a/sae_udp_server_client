@@ -9,6 +9,12 @@
 #include "clientFunctions.h"
 #include "../sharedFunctions.h"
 
+/**
+ * brief: function used in the threads. connects to PI (servers) and waits for response
+ * if no response comes it times out (TIMEOUT)
+ * @param arg the arguments needed to connect to the PI and to store the result
+ * @return NULL
+ */
 void* connectToPi(void* arg) {
     printf("inside connectToPi\n");
     long n;
@@ -42,7 +48,6 @@ void* connectToPi(void* arg) {
     printf("Talking to Pi: %s\n", (char*) measurePi);
 
     if(inet_pton(AF_INET, measurePi, &server.sin_addr) <= 0) {
-        //TODO ErrorHandling
         printError(INET_ADDR_ERROR);
         exit(EXIT_FAILURE);
     }
@@ -53,14 +58,15 @@ void* connectToPi(void* arg) {
     int useClient = 0;
 
     unsigned int serverLength=sizeof(struct sockaddr_in);
-    char* buffer = "Send me stuff";
-    char receiveBuffer[256];
+    char* buffer = "Send me stuff"; //TODO command to send to the PIs (not really important what is send because the servers have only one job)
+    char receiveBuffer[MAX_BUFFER_SIZE];
     n = sendto(sock, buffer, strlen(buffer), 0, (const struct sockaddr *) &server, serverLength);
     if (n < 0) {
         printError(SEND_ERROR);
         exit(EXIT_FAILURE);
     }
 
+    //if something is to poll we receive it with  recvfrom otherwise we run into the timeout
     int pollResult = poll(pollfds, useClient + 1, TIMEOUT);
     if (pollResult > 0) {
         //poll successful

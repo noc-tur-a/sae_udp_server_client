@@ -6,6 +6,28 @@
 
 #IncludeRegexTransform: 
 
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/client/clientFunctions.c
+stdio.h
+-
+sys/socket.h
+-
+netinet/in.h
+-
+arpa/inet.h
+-
+string.h
+-
+stdlib.h
+-
+poll.h
+-
+../errorCode.h
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.h
+clientFunctions.h
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/client/clientFunctions.h
+../sharedFunctions.h
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/sharedFunctions.h
+
 /mnt/c/pcloud/projects/clion/sae_udp_server_client/client/clientFunctions.h
 
 /mnt/c/pcloud/projects/clion/sae_udp_server_client/client/main.c
@@ -22,7 +44,21 @@ pthread.h
 clientFunctions.h
 /mnt/c/pcloud/projects/clion/sae_udp_server_client/client/clientFunctions.h
 
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.c
+stdio.h
+-
+errorCode.h
 /mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.h
+
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.h
+
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/sharedFunctions.c
+stdio.h
+-
+sys/time.h
+-
+sharedFunctions.h
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/sharedFunctions.h
 
 /mnt/c/pcloud/projects/clion/sae_udp_server_client/sharedFunctions.h
 

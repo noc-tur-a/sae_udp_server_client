@@ -6,9 +6,12 @@
 #include <unistd.h>
 #include <time.h>
 #include <sys/time.h>
+#include <stdbool.h>
 
 #include "../errorCode.h"
 #include "../sharedFunctions.h"
+
+#define MAX_LENGTH 50
 
 int main() {
 
@@ -39,28 +42,30 @@ int main() {
 
 
     fromLength = sizeof(struct sockaddr_in);
-    while(1) {
+    while(true) {
         n = recvfrom(sock, buf,1024,0,(struct sockaddr *)&from,&fromLength);
         if (n < 0) {
-            //TODO error handling
-            printf("recvfrom");
+            printError(RECEIVE_ERROR);
+            exit(EXIT_FAILURE);
         }
         //Fake response, measurement takes time
+
+        //TODO implement sensor, delete mockup
         printf("Received a datagram\n");
         int num = (rand() % (10 - 1 + 1)) + 1;
         //int num = (rand() % (10 - 9 + 1)) + 1;
         sleep(num);
 
-        char str[50];
+        char str[MAX_LENGTH];
         //unsigned long timeStamp = (unsigned long)time(NULL);
         unsigned long long timeStamp =  current_timestamp();
         sprintf(str, "%llu\n", timeStamp);
 
-        n = sendto(sock, str, 49, 0, (struct sockaddr *)&from, fromLength);
+        n = sendto(sock, str, MAX_LENGTH, 0, (struct sockaddr *)&from, fromLength);
         if (n < 0)
         {
-            //TODO error handling
-            printf("Error: sendto");
+            printError(SEND_ERROR);
+            exit(EXIT_FAILURE);
         }
     }
 }

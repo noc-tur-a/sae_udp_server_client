@@ -3,6 +3,10 @@
 
 #include "sharedFunctions.h"
 
+/**
+ * brief: hepler function to calculate the current timestamp in milliseconds
+ * @return long long timestamp in milliseconds
+ */
 long long current_timestamp() {
     struct timeval te;
     gettimeofday(&te, NULL); // get current time
