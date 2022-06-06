@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/client.dir/main.c.o CMakeFiles/client.dir/mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.c.o CMakeFiles/client.dir/mnt/c/pcloud/projects/clion/sae_udp_server_client/sharedFunctions.c.o CMakeFiles/client.dir/clientFunctions.c.o  -o client  -lpthread 

@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/client/clientFunctions.h
+
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/client/main.c
+stdio.h
+-
+string.h
+-
+pthread.h
+-
+../errorCode.h
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.h
+../sharedFunctions.h
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/sharedFunctions.h
+clientFunctions.h
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/client/clientFunctions.h
+
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.h
+
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/sharedFunctions.h
+
