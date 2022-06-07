@@ -5,24 +5,25 @@
 #include <strings.h>
 #include <unistd.h>
 #include <time.h>
-#include <sys/time.h>
 #include <stdbool.h>
 
 #include "../errorCode.h"
 #include "../sharedFunctions.h"
 
 #define MAX_LENGTH 50
+//TODO refactor
 
 int main() {
 
     srand(time(0));
 
     int sock, length;
-    long n;
+    long sendReceiveSuccess;
     unsigned int fromLength;
     struct sockaddr_in server;
     struct sockaddr_in from;
-    char buf[1024];
+    char bufferReceive[MAX_LENGTH];
+    char bufferSend[MAX_LENGTH];
 
     if((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
         printError(SOCKET_ERROR);
@@ -43,27 +44,27 @@ int main() {
 
     fromLength = sizeof(struct sockaddr_in);
     while(true) {
-        n = recvfrom(sock, buf,1024,0,(struct sockaddr *)&from,&fromLength);
-        if (n < 0) {
+        sendReceiveSuccess = recvfrom(sock, bufferReceive, MAX_LENGTH, 0, (struct sockaddr *)&from, &fromLength);
+        if (sendReceiveSuccess < 0) {
             printError(RECEIVE_ERROR);
             exit(EXIT_FAILURE);
         }
         //Fake response, measurement takes time
 
-        //TODO implement sensor, delete mockup
+        unsigned long long timeStampStart =  current_timestamp();
+
+        //TODO implement sensor, delete mockup, if servers mic is malfunction server should send 0 or nothing at all
         printf("Received a datagram\n");
         int num = (rand() % (10 - 1 + 1)) + 1;
         //int num = (rand() % (10 - 9 + 1)) + 1;
         sleep(num);
+        //End mockup
 
-        char str[MAX_LENGTH];
-        //unsigned long timeStamp = (unsigned long)time(NULL);
-        unsigned long long timeStamp =  current_timestamp();
-        sprintf(str, "%llu\n", timeStamp);
+        unsigned long long timeStampEnd =  current_timestamp();
+        sprintf(bufferSend, "%llu\n", timeStampEnd - timeStampStart);
 
-        n = sendto(sock, str, MAX_LENGTH, 0, (struct sockaddr *)&from, fromLength);
-        if (n < 0)
-        {
+        sendReceiveSuccess = sendto(sock, bufferSend, MAX_LENGTH, 0, (struct sockaddr *)&from, fromLength);
+        if (sendReceiveSuccess < 0) {
             printError(SEND_ERROR);
             exit(EXIT_FAILURE);
         }
