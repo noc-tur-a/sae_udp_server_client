@@ -22,7 +22,9 @@ int main(int argc, char *argv[]) {
     //thread_data_t tdata_pi_3;
     //tdata_pi_2.addr = 3;
 
+    //TODO propably not needed, PIs are sending the measured time difference
     unsigned long long timeStamp =  current_timestamp();
+
     printf("Current time: %llu\n", timeStamp);
     pthread_create(&thread_id_1, NULL, connectToPi, (void *)&tdata_pi_1);
     pthread_create(&thread_id_2, NULL, connectToPi, (void *)&tdata_pi_2);
@@ -39,8 +41,8 @@ int main(int argc, char *argv[]) {
 
     //TODO add 3 PI and calculate distance
     if(tdata_pi_1.result != 0 && tdata_pi_2.result != 0) {
-        printf("PI1 difference: %llu\n", tdata_pi_1.result - timeStamp);
-        printf("PI2 difference: %llu\n", tdata_pi_2.result - timeStamp);
+        printf("PI1 measured: %llu\n", tdata_pi_1.result);
+        printf("PI2 measured: %llu\n", tdata_pi_2.result);
         //printf("PI3 difference: %llu\n", tdata_pi_3.result - timeStamp);
     } else {
         printError(INSUFFICIENT_DATA);

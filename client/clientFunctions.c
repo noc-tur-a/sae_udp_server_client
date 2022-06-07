@@ -16,7 +16,7 @@
  * @return NULL
  */
 void* connectToPi(void* arg) {
-    long n;
+    long sendReceiveStatus;
     thread_data_t *tdata = (thread_data_t *)arg;
     tdata->result = 0;
     char* measurePi;
@@ -59,8 +59,8 @@ void* connectToPi(void* arg) {
     unsigned int serverLength=sizeof(struct sockaddr_in);
     char* buffer = "Send me stuff"; //TODO command to send to the PIs (not really important what is send because the servers have only one job)
     char receiveBuffer[MAX_BUFFER_SIZE];
-    n = sendto(sock, buffer, strlen(buffer), 0, (const struct sockaddr *) &server, serverLength);
-    if (n < 0) {
+    sendReceiveStatus = sendto(sock, buffer, strlen(buffer), 0, (const struct sockaddr *) &server, serverLength);
+    if (sendReceiveStatus < 0) {
         printError(SEND_ERROR);
         exit(EXIT_FAILURE);
     }
@@ -69,8 +69,8 @@ void* connectToPi(void* arg) {
     int pollResult = poll(pollfds, useClient + 1, TIMEOUT);
     if (pollResult > 0) {
         //poll successful
-        n = recvfrom(sock, receiveBuffer, MAX_BUFFER_SIZE, 0, (struct sockaddr *) &server, &serverLength);
-        if (n < 0) {
+        sendReceiveStatus = recvfrom(sock, receiveBuffer, MAX_BUFFER_SIZE, 0, (struct sockaddr *) &server, &serverLength);
+        if (sendReceiveStatus < 0) {
             printError(RECEIVE_ERROR);
             exit(EXIT_FAILURE);
         } else {
