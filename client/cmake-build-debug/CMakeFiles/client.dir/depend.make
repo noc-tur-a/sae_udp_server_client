@@ -13,6 +13,7 @@ CMakeFiles/client.dir/main.c.o: /mnt/c/pcloud/projects/clion/sae_udp_server_clie
 
 CMakeFiles/client.dir/mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.c.o: /mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.c
 CMakeFiles/client.dir/mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.c.o: /mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.h
+CMakeFiles/client.dir/mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.c.o: /mnt/c/pcloud/projects/clion/sae_udp_server_client/sharedFunctions.h
 
 CMakeFiles/client.dir/mnt/c/pcloud/projects/clion/sae_udp_server_client/sharedFunctions.c.o: /mnt/c/pcloud/projects/clion/sae_udp_server_client/sharedFunctions.c
 CMakeFiles/client.dir/mnt/c/pcloud/projects/clion/sae_udp_server_client/sharedFunctions.c.o: /mnt/c/pcloud/projects/clion/sae_udp_server_client/sharedFunctions.h

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "errorCode.h"
+#include "sharedFunctions.h"
 
 /**
  * brief prints error codes
@@ -33,11 +34,31 @@ void printError(errorCode_t errorCode) {
     if(errorCode == INVALID_IP_ADDRESS) {
         printf("Invalid IP address passed.\n");
     }
-    if(errorCode == INSUFFICIENT_DATA) {
-        printf("Can't calculate result. Insufficient Data.\n");
+    if(errorCode == INSUFFICIENT_DATA_PI_1) {
+        printf("Can't calculate result. Insufficient Data from PI 1. ");
     }
-    if(errorCode == PERMANENT_ERROR) {
-        printf("Wasn't able to collect data. PI wasn't reachable.\n");
+    if(errorCode == INSUFFICIENT_DATA_PI_2) {
+        printf("Can't calculate result. Insufficient Data from PI 2. ");
+    }
+    if(errorCode == INSUFFICIENT_DATA_PI_3) {
+        printf("Can't calculate result. Insufficient Data from PI 3. ");
+    }
+    if(errorCode == PERMANENT_ERROR_PI_1) {
+        printf("Wasn't able to collect data. PI 1 wasn't reachable.\n");
+    }
+    if(errorCode == PERMANENT_ERROR_PI_2) {
+        printf("Wasn't able to collect data. PI 2 wasn't reachable.\n");
+    }
+    if(errorCode == PERMANENT_ERROR_PI_3) {
+        printf("Wasn't able to collect data. PI 3 wasn't reachable.\n");
+    }
+}
+
+void printInsufficientDataError(int numberOfCurrentRetriesPi_X, int errorEnum) {
+    //(*numberOfCurrentRetriesPi_X)++;
+    printError(errorEnum);
+    if(numberOfCurrentRetriesPi_X <= 5) {
+        printf("Retry %d / %d \n", numberOfCurrentRetriesPi_X, (MAX_NUMBER_OF_RETRIES - 1));
     }
 }
 
@@ -69,10 +90,10 @@ void printError(errorCode_t errorCode) {
 //    if(errorCode.errorCause == INVALID_IP_ADDRESS) {
 //        printf("Invalid IP address passed.\n");
 //    }
-//    if(errorCode.errorCause == INSUFFICIENT_DATA) {
+//    if(errorCode.errorCause == INSUFFICIENT_DATA_PI_1) {
 //        printf("Can't calculate result. Insufficient Data.\n");
 //    }
-//    if(errorCode.errorCause == PERMANENT_ERROR) {
+//    if(errorCode.errorCause == PERMANENT_ERROR_PI_1) {
 //        printf("Wasn't able to collect .\n");
 //    }
 //

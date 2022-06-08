@@ -47,7 +47,8 @@ int main() {
         sendReceiveSuccess = recvfrom(sock, bufferReceive, MAX_LENGTH, 0, (struct sockaddr *)&from, &fromLength);
         if (sendReceiveSuccess < 0) {
             printError(RECEIVE_ERROR);
-            exit(EXIT_FAILURE);
+            //Servers should never exit
+            //exit(EXIT_FAILURE);
         }
         //Fake response, measurement takes time
 
@@ -66,7 +67,8 @@ int main() {
         sendReceiveSuccess = sendto(sock, bufferSend, MAX_LENGTH, 0, (struct sockaddr *)&from, fromLength);
         if (sendReceiveSuccess < 0) {
             printError(SEND_ERROR);
-            exit(EXIT_FAILURE);
+            //Servers should never exit
+            //exit(EXIT_FAILURE);
         }
     }
 }

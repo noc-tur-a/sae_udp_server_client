@@ -9,6 +9,7 @@
 #define MAX_CLIENTS 6 //TODO check if needed
 #define MAX_BUFFER_SIZE 256
 
+
 typedef struct thread_data {
     int addr;
     unsigned long long result;

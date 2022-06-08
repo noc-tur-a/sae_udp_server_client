@@ -7,6 +7,8 @@
 
 #define SERVER_PORT 18000
 
+#define MAX_NUMBER_OF_RETRIES 6
+
 long long current_timestamp();
 
 #endif //CLIENT_SHAREDFUNCTIONS_H

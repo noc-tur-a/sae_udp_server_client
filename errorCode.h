@@ -12,8 +12,12 @@ typedef enum errorCode {
     RECEIVE_ERROR,      /** unable to read data **/
     TIMEOUT_REACHED,    /** timeout was reached**/
     INVALID_IP_ADDRESS, /** couldn't translate IP address **/
-    INSUFFICIENT_DATA,   /** PI couldn't povide data **/
-    PERMANENT_ERROR     /** one or more PI isn't reachable for X MAX_NUMBER_OF_RETRIES amounts of retries **/
+    INSUFFICIENT_DATA_PI_1,   /** PI 1 couldn't povide data **/
+    INSUFFICIENT_DATA_PI_2,   /** PI 2 couldn't povide data **/
+    INSUFFICIENT_DATA_PI_3,   /** PI 3 couldn't povide data **/
+    PERMANENT_ERROR_PI_1,     /** PI 1 isn't reachable for MAX_NUMBER_OF_RETRIES amounts of retries **/
+    PERMANENT_ERROR_PI_2,     /** PI 2 isn't reachable for MAX_NUMBER_OF_RETRIES amounts of retries **/
+    PERMANENT_ERROR_PI_3     /** PI 3 isn't reachable for MAX_NUMBER_OF_RETRIES amounts of retries **/
 } errorCode_t;
 
 //typedef enum {
@@ -27,8 +31,8 @@ typedef enum errorCode {
 //    RECEIVE_ERROR,      /** unable to read data **/
 //    TIMEOUT_REACHED,    /** timeout was reached**/
 //    INVALID_IP_ADDRESS, /** couldn't translate IP address **/
-//    INSUFFICIENT_DATA,   /** PI couldn't povide data **/
-//    PERMANENT_ERROR     /** one or more PI isn't reachable for X MAX_NUMBER_OF_RETRIES amounts of retries **/
+//    INSUFFICIENT_DATA_PI_1,   /** PI couldn't povide data **/
+//    PERMANENT_ERROR_PI_1     /** one or more PI isn't reachable for X MAX_NUMBER_OF_RETRIES amounts of retries **/
 //} errorCause;
 //
 //typedef struct errorCode {
@@ -45,5 +49,8 @@ typedef enum errorCode {
 //};
 
 void printError(errorCode_t errorCode);
+
+void printInsufficientDataError(int numberOfCurrentRetriesPi_X, int errorEnum);
+
 //void printError(struct errorCode errorCode);
 #endif //SAE_SERVER_ERRORCODE_H

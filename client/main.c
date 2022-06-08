@@ -6,7 +6,7 @@
 #include "../sharedFunctions.h"
 #include "clientFunctions.h"
 
-#define MAX_NUMBER_OF_RETRIES 6
+//#define MAX_NUMBER_OF_RETRIES 6
 
 int main(int argc, char *argv[]) {
 
@@ -25,8 +25,10 @@ int main(int argc, char *argv[]) {
     //tdata_pi_2.addr = 3;
 
     //int number_of_retries = 0;
-    int numberOfCurrentRetries = 0;
-    while (numberOfCurrentRetries < MAX_NUMBER_OF_RETRIES) {
+    int numberOfCurrentRetriesPi_1 = 0;
+    int numberOfCurrentRetriesPi_2 = 0;
+    //int numberOfCurrentRetriesPi_3 = 0;
+    while (numberOfCurrentRetriesPi_1 < MAX_NUMBER_OF_RETRIES && numberOfCurrentRetriesPi_2 < MAX_NUMBER_OF_RETRIES) {
 
         //TODO propably not needed, PIs are sending the measured time difference
         unsigned long long timeStamp = current_timestamp();
@@ -50,17 +52,45 @@ int main(int argc, char *argv[]) {
             printf("PI1 measured: %llu\n", tdata_pi_1.result);
             printf("PI2 measured: %llu\n", tdata_pi_2.result);
             //printf("PI3 difference: %llu\n", tdata_pi_3.result - timeStamp);
-            numberOfCurrentRetries = 0;
+            numberOfCurrentRetriesPi_1 = 0;
+            numberOfCurrentRetriesPi_2 = 0;
+            //numberOfCurrentRetriesPi_3 = 0;
         } else {
-            printError(INSUFFICIENT_DATA);
-            numberOfCurrentRetries++;
+            if(tdata_pi_1.result == 0) {
+                numberOfCurrentRetriesPi_1++;
+                printInsufficientDataError(numberOfCurrentRetriesPi_1, INSUFFICIENT_DATA_PI_1);
+                //numberOfCurrentRetriesPi_1++;
+                //printError(INSUFFICIENT_DATA_PI_1);
+                //printf("\nRetry %d / %d\n", numberOfCurrentRetriesPi_1, (MAX_NUMBER_OF_RETRIES - 1));
+            }
+            if(tdata_pi_2.result == 0) {
+                numberOfCurrentRetriesPi_2++;
+                printInsufficientDataError(numberOfCurrentRetriesPi_2, INSUFFICIENT_DATA_PI_2);
 
-            if(numberOfCurrentRetries >= MAX_NUMBER_OF_RETRIES) {
-                printError(PERMANENT_ERROR);
+//                numberOfCurrentRetriesPi_2++;
+//                printError(INSUFFICIENT_DATA_PI_2);
+//                printf("\nRetry %d / %d\n", numberOfCurrentRetriesPi_2, (MAX_NUMBER_OF_RETRIES - 1));
+            }
+//            if(tdata_pi_3.result == 0) {
+//                  numberOfCurrentRetriesPi_3++;
+//                printInsufficientDataError(&numberOfCurrentRetriesPi_3, INSUFFICIENT_DATA_PI_3);
+//            }
+
+            if(numberOfCurrentRetriesPi_1 >= MAX_NUMBER_OF_RETRIES) {
+                printError(PERMANENT_ERROR_PI_1);
+            }
+            if(numberOfCurrentRetriesPi_2 >= MAX_NUMBER_OF_RETRIES) {
+                printError(PERMANENT_ERROR_PI_2);
+            }
+//            if(numberOfCurrentRetriesPi_3 >= MAX_NUMBER_OF_RETRIES) {
+//                printError(PERMANENT_ERROR_PI_3);
+//            }
+
+            if(numberOfCurrentRetriesPi_1 >= MAX_NUMBER_OF_RETRIES || numberOfCurrentRetriesPi_2 >= MAX_NUMBER_OF_RETRIES) {
                 break;
             }
 
-            printf("\nRetry %d / %d\n", numberOfCurrentRetries, (MAX_NUMBER_OF_RETRIES-1));
+            //printf("\nRetry %d / %d\n", numberOfCurrentRetriesPi_1, (MAX_NUMBER_OF_RETRIES - 1));
         }
     }
 }
