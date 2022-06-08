@@ -19,16 +19,16 @@ void* connectToPi(void* arg) {
     long sendReceiveStatus;
     thread_data_t *tdata = (thread_data_t *)arg;
     tdata->result = 0;
-    char* measurePi;
+    const char* ipAddressPI;
 
     if(tdata->addr == 1) {
-        measurePi = "192.168.8.210";
+        ipAddressPI = "192.168.8.210";
     }else if (tdata->addr == 2) {
-        measurePi = "192.168.8.220";
+        ipAddressPI = "192.168.8.220";
     }else if (tdata->addr == 3) {
-        measurePi = "192.168.8.230";
+        ipAddressPI = "192.168.8.230";
     } else {
-        //measurePi = "0.0.0.0";
+        //ipAddressPI = "0.0.0.0";
         printError(INVALID_IP_ADDRESS);
         exit(EXIT_FAILURE);
     }
@@ -44,9 +44,9 @@ void* connectToPi(void* arg) {
         exit(EXIT_FAILURE);
     }
 
-    printf("Talking to Pi: %s\n", (char*) measurePi);
+    printf("Talking to Pi: %s\n", (char*) ipAddressPI);
 
-    if(inet_pton(AF_INET, measurePi, &server.sin_addr) <= 0) {
+    if(inet_pton(AF_INET, ipAddressPI, &server.sin_addr) <= 0) {
         printError(INET_ADDR_ERROR);
         exit(EXIT_FAILURE);
     }

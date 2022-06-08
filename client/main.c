@@ -50,17 +50,17 @@ int main(int argc, char *argv[]) {
             printf("PI1 measured: %llu\n", tdata_pi_1.result);
             printf("PI2 measured: %llu\n", tdata_pi_2.result);
             //printf("PI3 difference: %llu\n", tdata_pi_3.result - timeStamp);
+            numberOfCurrentRetries = 0;
         } else {
             printError(INSUFFICIENT_DATA);
             numberOfCurrentRetries++;
+
             if(numberOfCurrentRetries >= MAX_NUMBER_OF_RETRIES) {
                 printError(PERMANENT_ERROR);
                 break;
             }
+
             printf("\nRetry %d / %d\n", numberOfCurrentRetries, (MAX_NUMBER_OF_RETRIES-1));
         }
-
-
     }
-
 }

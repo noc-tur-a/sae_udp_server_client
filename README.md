@@ -17,6 +17,8 @@
 - 
 ## Files client
 - client/main.c
+- client/clientFunctions.c
+- client/clientFunctions.h
 - errorCode.c
 - errorCode.h
 - sharedFunctions.c
