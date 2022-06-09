@@ -10,65 +10,68 @@
 #include "../errorCode.h"
 #include "../sharedFunctions.h"
 
-#define MAX_LENGTH 50
+#define MAX_BUFFER_LENGTH 50
 //TODO refactor
 
 int main() {
 
     srand(time(0));
 
-    int sock, length;
+    int sockFd, serverSocketLength;
     long sendReceiveSuccess;
-    unsigned int fromLength;
-    struct sockaddr_in server;
+    unsigned int fromAddressLength = sizeof(struct sockaddr_in);;
+    struct sockaddr_in serverSocket;
     struct sockaddr_in from;
-    char bufferReceive[MAX_LENGTH];
-    char bufferSend[MAX_LENGTH];
 
-    if((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
+    char bufferReceive[MAX_BUFFER_LENGTH];
+    char bufferSend[MAX_BUFFER_LENGTH];
+
+    unsigned long long timeStampStart = 0;
+    unsigned long long timeStampEnd = 0;
+
+
+    if((sockFd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
         printError(SOCKET_ERROR);
         exit(EXIT_FAILURE);
     }
 
-    length = sizeof(server);
-    bzero(&server,length);
-    server.sin_family=AF_INET;
-    server.sin_addr.s_addr=INADDR_ANY;
-    server.sin_port=htons(SERVER_PORT);
-    if (bind(sock,(struct sockaddr *)&server,length) < 0)
+    serverSocketLength = sizeof(serverSocket);
+    bzero(&serverSocket, serverSocketLength);
+
+    serverSocket.sin_family=AF_INET;
+    serverSocket.sin_addr.s_addr=INADDR_ANY;
+    serverSocket.sin_port=htons(SERVER_PORT);
+
+    if (bind(sockFd, (struct sockaddr *)&serverSocket, serverSocketLength) < 0)
     {
         printError(BIND_ERROR);
         exit(EXIT_FAILURE);
     }
 
-
-    fromLength = sizeof(struct sockaddr_in);
     while(true) {
-        sendReceiveSuccess = recvfrom(sock, bufferReceive, MAX_LENGTH, 0, (struct sockaddr *)&from, &fromLength);
-        if (sendReceiveSuccess < 0) {
+
+        sendReceiveSuccess = recvfrom(sockFd, bufferReceive, MAX_BUFFER_LENGTH, 0, (struct sockaddr *)&from, &fromAddressLength);
+        if (sendReceiveSuccess > 0) {
+            printf("Received a datagram\n");
+            timeStampStart = current_timestamp();
+
+            //TODO implement sensor, delete mockup, if servers mic is malfunction serverSocket should send 0 or nothing at all
+            int num = (rand() % (10 - 1 + 1)) + 1;
+            //int num = (rand() % (10 - 9 + 1)) + 1;
+            sleep(num);
+            //End mockup
+
+            timeStampEnd = current_timestamp();
+            snprintf(bufferSend, MAX_BUFFER_LENGTH, "%llu\n", timeStampEnd - timeStampStart);
+
+            sendReceiveSuccess = sendto(sockFd, bufferSend, MAX_BUFFER_LENGTH, 0, (struct sockaddr *) &from, fromAddressLength);
+            if (sendReceiveSuccess < 0) {
+                printError(SEND_ERROR);
+            } else {
+                printf("Send success\n");
+            }
+        } else {
             printError(RECEIVE_ERROR);
-            //Servers should never exit
-            //exit(EXIT_FAILURE);
-        }
-        //Fake response, measurement takes time
-
-        unsigned long long timeStampStart =  current_timestamp();
-
-        //TODO implement sensor, delete mockup, if servers mic is malfunction server should send 0 or nothing at all
-        printf("Received a datagram\n");
-        int num = (rand() % (10 - 1 + 1)) + 1;
-        //int num = (rand() % (10 - 9 + 1)) + 1;
-        sleep(num);
-        //End mockup
-
-        unsigned long long timeStampEnd =  current_timestamp();
-        sprintf(bufferSend, "%llu\n", timeStampEnd - timeStampStart);
-
-        sendReceiveSuccess = sendto(sock, bufferSend, MAX_LENGTH, 0, (struct sockaddr *)&from, fromLength);
-        if (sendReceiveSuccess < 0) {
-            printError(SEND_ERROR);
-            //Servers should never exit
-            //exit(EXIT_FAILURE);
         }
     }
 }

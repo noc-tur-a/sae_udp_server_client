@@ -33,6 +33,7 @@ int main(int argc, char *argv[]) {
         //TODO probably not needed, PIs are sending the measured time difference
         unsigned long long timeStamp = current_timestamp();
 
+        printf("NEW MEASUREMENT ***************************************************************************\n");
         printf("Current time: %llu\n", timeStamp);
         pthread_create(&thread_id_1, NULL, connectToPi, (void *) &tdata_pi_1);
         pthread_create(&thread_id_2, NULL, connectToPi, (void *) &tdata_pi_2);

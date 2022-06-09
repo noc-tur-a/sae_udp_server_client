@@ -6,13 +6,29 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.c
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/client/clientFunctions.c
 stdio.h
 -
-errorCode.h
+sys/socket.h
+-
+netinet/in.h
+-
+arpa/inet.h
+-
+string.h
+-
+stdlib.h
+-
+poll.h
+-
+../errorCode.h
 /mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.h
-sharedFunctions.h
+clientFunctions.h
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/client/clientFunctions.h
+../sharedFunctions.h
 /mnt/c/pcloud/projects/clion/sae_udp_server_client/sharedFunctions.h
+
+/mnt/c/pcloud/projects/clion/sae_udp_server_client/client/clientFunctions.h
 
 /mnt/c/pcloud/projects/clion/sae_udp_server_client/errorCode.h
 
